@@ -82,13 +82,13 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
           $if pretty_links:
               $code:
                   (sup_question_body,sup_question_links) = suppify_body(post.question['body'])
-              $sup_question_body
+              $:sup_question_body
               <div id="question-links">
               $for key in sup_question_links.keys():
                   [$(key)] $(sup_question_links[key].replace("&","&amp;"))<br/>
               </div>
           $else:
-              $post.question['body']
+              $:post.question['body']
           </div>
             $if post.question.get('comments') and comments:
                 <div class="question-comments">  
@@ -96,7 +96,7 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
                     <div class="comment">
                         $if int(comment['score']) > 0:
                             ($comment['score'])    
-                        $comment['body'] - <b> $comment.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned')</b>                   
+                        $:comment['body'] - <b> $comment.get('owner', {'display_name':'community_owned'}).get('display_name','community_owned')</b>                   
                     </div>
                 </div>
           <div class="answers">
@@ -112,12 +112,12 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
                     $if pretty_links:  
                         $code:
                             (sup_answer_body,sup_answer_links) = suppify_body(answer['body'])
-                        $sup_answer_body  
+                        $:sup_answer_body  
                         $for key in sup_answer_links.keys():
                             [$(key)] $(sup_answer_links[key].replace("&","&amp;"))<br/>
                         <br/>
                     $else:
-                        $answer['body']
+                        $:answer['body']
                   </div>
                   $if answer.get('comments') and comments:
                       <div class="answer-comments">       
@@ -125,7 +125,7 @@ $def with (service, post, pretty_links, printer, link_to_home, pretty_print, com
                           <div class="comment">
                           $if int(comment['score']) > 0:
                                ($comment['score'])    
-                          $comment['body'] - <b> $comment.get('owner',{'display_name':'community_owned'}).get('display_name','community_owned')</b>     
+                          $:comment['body'] - <b> $comment.get('owner',{'display_name':'community_owned'}).get('display_name','community_owned')</b>     
                           </div>
                       </div>
                   <div class="answer-pagenumber">$int(answer_number+1)</div>
